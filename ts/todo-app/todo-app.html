@@ -1,0 +1,36 @@
+<section class="todoapp">
+  <header class="header">
+    <h1>todos</h1>
+    <input class="new-todo" placeholder="What needs to be done?" [(ngModel)]="newTodo" autofocus (keyup.enter)="addTodo()">
+  </header>
+  <!-- This section should be hidden by default and shown when there are todos -->
+  <section *ngIf="todoStore.todos.length > 0" class="main">
+    <input class="toggle-all" type="checkbox" #toggleAll [checked]="todoStore.allCompleted()"  (click)=todoStore.setAllCompleted(toggleAll.checked)>
+    <label for="toggle-all" >Mark all as complete</label>
+    <ul class="todo-list">
+      <li *ngFor="#todo of todoStore.todos | filterTodos:todoFilter" [class.completed]="todo.completed" [class.editing]="todo.editing">
+        <div class="view">
+          <input class="toggle" #completed type="checkbox" (click)="todoStore.toggleCompleted(todo)" [checked]="todo.completed">
+          <label (dblclick)="editTodo(todo)">{{todo.title}}</label>
+          <button class="destroy" (click)="todoStore.remove(todo)"></button>
+        </div>
+        <input *ngIf="todo.editing" class="edit" [todoFocus]="todo.editing" [hidden]="!todo.editing" #editedTodo [value]="todo.title" (blur)="updateTodo(todo, editedTodo.value)" (keyup.enter)="updateTodo(todo, editedTodo.value)" (keyup.esc)="discardChanges(todo)">
+      </li>
+    </ul>
+  </section>
+	<footer class="footer" *ngIf="todoStore.todos.length > 0">
+		<span class="todo-count"><strong>{{todoStore.getRemaining().length}}</strong> {{todoStore.getRemaining().length == 1 ? 'item' : 'items'}} left</span>
+    <ul class="filters">
+      <li>
+        <a [class.selected]="todoFilter==''" [routerLink]="['TodoApp', {filter: ''}]">All</a>
+      </li>
+      <li>
+        <a [class.selected]="todoFilter=='active'" [routerLink]="['TodoApp', {filter: 'active'}]">Active</a>
+      </li>
+      <li>
+        <a [class.selected]="todoFilter=='completed'" [routerLink]="['TodoApp', {filter: 'completed'}]">Completed</a>
+      </li>
+    </ul>
+    <button class="clear-completed" *ngIf="todoStore.getCompleted().length > 0" (click)="todoStore.removeCompleted()">Clear completed</button>
+  </footer>
+</section>
