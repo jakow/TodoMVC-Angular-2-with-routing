@@ -20,9 +20,10 @@
 ## Instructions
 
 To run the app:
-1. Run `npm install`
-2. If you don't have Gulp, install Gulp CLI `npm install -g gulp-cli`
-2. Run `gulp serve`. This will transpile TypeScript to JS, copy some stuff over and launch the app in your browser.
+
+1.	Run `npm install`
+2.	If you don't have Gulp, install Gulp CLI `npm install -g gulp-cli`
+3.	Run `gulp serve`. This will transpile TypeScript to JS, copy some stuff over and launch the app in your browser.
 
 
 ## Implementation
