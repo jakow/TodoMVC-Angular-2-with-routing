@@ -38,3 +38,6 @@ Hope you find it useful!
 ## Credit
 
 Created by [Jakub Kowalczyk](https://github.com/jakow)
+
+## Note
+Now that Angular 2 has been officially released, this probably does not work due to changes in Angular 2 API.
